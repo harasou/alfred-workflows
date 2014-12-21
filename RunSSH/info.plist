@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string></string>
+	<key>connections</key>
+	<dict>
+		<key>0F670CDD-25DA-42B5-BE17-A337C369E2BA</key>
+		<array/>
+		<key>67BBD928-E5F6-4667-931C-1AFC24584AF8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C9F0FB09-8BC7-4531-BAC6-DC4F75C76355</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>harasou</string>
+	<key>description</key>
+	<string>run ssh on terminal</string>
+	<key>disabled</key>
+	<true/>
+	<key>name</key>
+	<string>Run SSH</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>ssh</string>
+				<key>script</key>
+				<string>result=$(awk '$1~/{query}/{split($1,e,",");print e[1]}' "$HOME/.ssh/known_hosts"|sort)
+
+cat &lt;&lt;EOD
+&lt;?xml version="1.0"?&gt;
+&lt;items&gt;
+$(echo "${result:={query}}"|while read h ; do
+   [[ $h =~ \[(.*)\]:([0-9]+) ]] &amp;&amp; arg="-p ${BASH_REMATCH[2]} ${BASH_REMATCH[1]}" || arg=$h
+   echo "&lt;item uid='$h' arg='$arg' valid='yes' autocomplete='$h'&gt;&lt;title&gt;$h&lt;/title&gt;&lt;/item&gt;"
+done)
+&lt;/items&gt;
+EOD
+</string>
+				<key>title</key>
+				<string>ssh {query}</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>67BBD928-E5F6-4667-931C-1AFC24584AF8</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>hotstring</key>
+				<string></string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>0F670CDD-25DA-42B5-BE17-A337C369E2BA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>ssh {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.terminalcommand</string>
+			<key>uid</key>
+			<string>C9F0FB09-8BC7-4531-BAC6-DC4F75C76355</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>0F670CDD-25DA-42B5-BE17-A337C369E2BA</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>67BBD928-E5F6-4667-931C-1AFC24584AF8</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>C9F0FB09-8BC7-4531-BAC6-DC4F75C76355</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>https://github.com/harasou/alfred-workflows</string>
+</dict>
+</plist>

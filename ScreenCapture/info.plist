@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string></string>
+	<key>connections</key>
+	<dict>
+		<key>6C68D0BB-A89A-4FDD-BB99-B5A5B460646E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C88DFE9A-649E-4B5A-8385-61856EBD39CE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>C88DFE9A-649E-4B5A-8385-61856EBD39CE</key>
+		<array/>
+	</dict>
+	<key>createdby</key>
+	<string>harasou</string>
+	<key>description</key>
+	<string>take screen shots from Alfred</string>
+	<key>disabled</key>
+	<true/>
+	<key>name</key>
+	<string>Screen Capture</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>png="$HOME/Desktop/sc$(date +%Y%m%d_%H%M%S).png"
+
+screencapture -{query} "$png"
+
+[ -f "$png" ] &amp;&amp; echo $png</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C88DFE9A-649E-4B5A-8385-61856EBD39CE</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>50C21762-0E65-4658-8A63-F2A8D7D79D37</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>sc</string>
+				<key>script</key>
+				<string>cat &lt;&lt; EOB
+&lt;?xml version="1.0"?&gt;
+&lt;items&gt;
+  &lt;item uid="sc_sP" arg="iP"&gt;
+    &lt;title&gt;File&lt;/title&gt;
+    &lt;subtitle&gt;選択した範囲をファイルに保存&lt;/subtitle&gt;
+    &lt;icon&gt;086245-rounded-glossy-black-icon-business-cursor.png&lt;/icon&gt;
+  &lt;/item&gt;
+  &lt;item uid="sc_sc" arg="sc"&gt;
+    &lt;title&gt;Clipboard&lt;/title&gt;
+    &lt;subtitle&gt;選択した範囲をクリップボードに保存&lt;/subtitle&gt;
+    &lt;icon&gt;086245-rounded-glossy-black-icon-business-cursor.png&lt;/icon&gt;
+  &lt;/item&gt;
+  &lt;item uid="sc_wP" arg="wP"&gt;
+    &lt;title&gt;File&lt;/title&gt;
+    &lt;subtitle&gt;選択したウィンドウをファイルに保存&lt;/subtitle&gt;
+    &lt;icon&gt;086252-rounded-glossy-black-icon-business-document10-sc1.png&lt;/icon&gt;
+  &lt;/item&gt;
+  &lt;item uid="sc_wc" arg="wc"&gt;
+    &lt;title&gt;Clipboard&lt;/title&gt;
+    &lt;subtitle&gt;選択したウィンドウをクリップボードに保存&lt;/subtitle&gt;
+    &lt;icon&gt;086252-rounded-glossy-black-icon-business-document10-sc1.png&lt;/icon&gt;
+  &lt;/item&gt;
+&lt;/items&gt;
+EOB
+</string>
+				<key>title</key>
+				<string>Screen Capture</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>6C68D0BB-A89A-4FDD-BB99-B5A5B460646E</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>50C21762-0E65-4658-8A63-F2A8D7D79D37</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>6C68D0BB-A89A-4FDD-BB99-B5A5B460646E</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>C88DFE9A-649E-4B5A-8385-61856EBD39CE</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>https://github.com/harasou/alfred-workflows</string>
+</dict>
+</plist>

@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net"
 	"os"
 	"regexp"
@@ -23,24 +22,24 @@ func main() {
 		return
 	}
 
-	db, err := geoip2.Open(mmdb)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer db.Close()
-
 	wf := alfred.Workflow()
 	defer wf.Print()
+
+	db, err := geoip2.Open(mmdb)
+	if err != nil {
+		wf.AddItem(&alfred.Item{
+			Title: "データベースのオープンに失敗しました",
+		})
+		return
+	}
+	defer db.Close()
 
 	for _, key := range os.Args[1:] {
 
 		if !reg_ip.MatchString(key) {
 			wf.AddItem(&alfred.Item{
-				Uid:      key,
-				Arg:      key,
 				Title:    "IPアドレスを入力してください",
 				Subtitle: "ex. 1.1.1.1 8.8.8.8",
-				Icon:     "",
 			})
 			continue
 		}
@@ -49,7 +48,10 @@ func main() {
 
 		r, err := db.City(ip)
 		if err != nil {
-			log.Fatal(err)
+			wf.AddItem(&alfred.Item{
+				Title: "データベースの検索に失敗しました",
+			})
+			continue
 		}
 		if r.Country.IsoCode == "" {
 			wf.AddItem(&alfred.Item{

@@ -17,6 +17,38 @@
 				<string></string>
 			</dict>
 		</array>
+		<key>A70BCB71-D898-46F8-90CD-237CB8E21ACC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C460BF04-D495-4E56-83D5-E1B4C7699B4B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>C7A5C961-6EFD-4661-9ACF-367E12C1E626</key>
+		<array/>
+		<key>F9FD69D0-DB82-4DAB-BE44-53F4FB89188A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7E73C1A9-84B1-4045-A3AB-58A5B2C487EA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A70BCB71-D898-46F8-90CD-237CB8E21ACC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>harasou</string>
@@ -31,21 +63,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<true/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>EA848E9D-B7C1-409F-9DF5-AA054F3CF343</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -53,7 +70,7 @@
 				<key>keyword</key>
 				<string>geoip</string>
 				<key>script</key>
-				<string>./geoip2 $(echo ${ip:={query}})</string>
+				<string>./geoip2 $(echo -n ${ip:={query}})</string>
 				<key>title</key>
 				<string>geoip</string>
 				<key>type</key>
@@ -95,6 +112,124 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>EA848E9D-B7C1-409F-9DF5-AA054F3CF343</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>output</key>
+				<integer>0</integer>
+				<key>removeextension</key>
+				<false/>
+				<key>sticky</key>
+				<false/>
+				<key>text</key>
+				<string>データベースのダウンロードを開始しました</string>
+				<key>title</key>
+				<string>GeoIP2</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>7E73C1A9-84B1-4045-A3AB-58A5B2C487EA</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>geoip</string>
+				<key>subtext</key>
+				<string>GeoLite2 データベースは、毎月の第一火曜日にアップデートされます</string>
+				<key>text</key>
+				<string>geoip download</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>F9FD69D0-DB82-4DAB-BE44-53F4FB89188A</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>output</key>
+				<integer>0</integer>
+				<key>removeextension</key>
+				<false/>
+				<key>sticky</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>GeoIP2</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>C460BF04-D495-4E56-83D5-E1B4C7699B4B</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>GeoURL="http://geolite.maxmind.com/download/geoip/database/"
+GL2CITY="GeoLite2-City"
+
+
+cd mmdb
+
+MD5=$(curl -s $GeoURL/${GL2CITY}.mmdb.gz|gunzip|tee ${GL2CITY}.mmdb.tmp|md5 -q)
+
+if [ $(curl -s $GeoURL/${GL2CITY}.md5) == $MD5 ] ; then
+    mv ${GL2CITY}.mmdb.tmp ${GL2CITY}.mmdb
+    echo "ダウンロードが正常に完了しました"
+else
+    rm -f ${GL2CITY}.mmdb.tmp
+    echo "ダウンロードに失敗しました"
+fi
+</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A70BCB71-D898-46F8-90CD-237CB8E21ACC</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -105,6 +240,21 @@
 			<key>ypos</key>
 			<real>10</real>
 		</dict>
+		<key>7E73C1A9-84B1-4045-A3AB-58A5B2C487EA</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
+		</dict>
+		<key>A70BCB71-D898-46F8-90CD-237CB8E21ACC</key>
+		<dict>
+			<key>ypos</key>
+			<real>250</real>
+		</dict>
+		<key>C460BF04-D495-4E56-83D5-E1B4C7699B4B</key>
+		<dict>
+			<key>ypos</key>
+			<real>250</real>
+		</dict>
 		<key>C7A5C961-6EFD-4661-9ACF-367E12C1E626</key>
 		<dict>
 			<key>ypos</key>
@@ -114,6 +264,11 @@
 		<dict>
 			<key>ypos</key>
 			<real>10</real>
+		</dict>
+		<key>F9FD69D0-DB82-4DAB-BE44-53F4FB89188A</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
 		</dict>
 	</dict>
 	<key>webaddress</key>

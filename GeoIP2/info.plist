@@ -53,7 +53,7 @@
 				<key>keyword</key>
 				<string>geoip</string>
 				<key>script</key>
-				<string>./geoip2 {query}</string>
+				<string>./geoip2 $(echo ${ip:={query}})</string>
 				<key>title</key>
 				<string>geoip</string>
 				<key>type</key>

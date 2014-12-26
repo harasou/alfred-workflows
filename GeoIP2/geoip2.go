@@ -12,7 +12,7 @@ import (
 )
 
 var reg_ip = regexp.MustCompile(
-	"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
+	"(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)")
 
 const mmdb = "mmdb/GeoLite2-City.mmdb"
 
@@ -34,19 +34,19 @@ func main() {
 	}
 	defer db.Close()
 
-	for _, key := range os.Args[1:] {
+	iplist := reg_ip.FindAllString(os.Args[1], -1)
 
-		if !reg_ip.MatchString(key) {
-			wf.AddItem(&alfred.Item{
-				Title:    "IPアドレスを入力してください",
-				Subtitle: "ex. 1.1.1.1 8.8.8.8",
-			})
-			continue
-		}
+	if len(iplist) == 0 {
+		wf.AddItem(&alfred.Item{
+			Title:    "IPアドレスを入力してください",
+			Subtitle: "ex. 1.1.1.1 8.8.8.8",
+		})
+		return
+	}
 
-		ip := net.ParseIP(key)
+	for _, ip := range iplist {
 
-		r, err := db.City(ip)
+		r, err := db.City(net.ParseIP(ip))
 		if err != nil {
 			wf.AddItem(&alfred.Item{
 				Title: "データベースの検索に失敗しました",
@@ -55,18 +55,18 @@ func main() {
 		}
 		if r.Country.IsoCode == "" {
 			wf.AddItem(&alfred.Item{
-				Uid:      key,
+				Uid:      ip,
 				Title:    "該当するデータが見つかりませんでした",
-				Arg:      key,
-				Subtitle: key,
+				Arg:      ip,
+				Subtitle: ip,
 				Icon:     "",
 			})
 		} else {
 			wf.AddItem(&alfred.Item{
-				Uid:      key,
+				Uid:      ip,
 				Title:    fmt.Sprintf("%v (%v:%v)", r.Country.IsoCode, r.Country.Names["en"], r.Country.Names["ja"]),
-				Arg:      key,
-				Subtitle: key,
+				Arg:      ip,
+				Subtitle: ip,
 				Icon:     fmt.Sprintf("icons/%v.png", strings.ToLower(r.Country.IsoCode)),
 			})
 		}

@@ -183,7 +183,7 @@
 				<key>sticky</key>
 				<false/>
 				<key>text</key>
-				<string>データベースのダウンロードを開始します</string>
+				<string>データベースのチェック中です</string>
 				<key>title</key>
 				<string>GeoIP2</string>
 			</dict>
@@ -204,7 +204,7 @@
 				<key>subtext</key>
 				<string>GeoLite2 データベースは、毎月の第一火曜日にアップデートされます</string>
 				<key>text</key>
-				<string>geoip download</string>
+				<string>geoip dbupdate</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -256,7 +256,7 @@ cd mmdb
 MD5=$(curl -s $GeoURL/${GL2CITY}.md5)
 
 if [ -f ${GL2CITY}.mmdb -a "$MD5" == "$(md5 -q ${GL2CITY}.mmdb)" ] ; then
-    echo "データベースは最新です"
+    echo "データベースは最新でした"
     exit 0
 fi
 
@@ -265,7 +265,7 @@ MD5=$(curl -s $GeoURL/${GL2CITY}.mmdb.gz|gunzip|tee ${GL2CITY}.mmdb.tmp|md5 -q)
 
 if [ "$MD5" == "$(md5 -q ${GL2CITY}.mmdb.tmp)" ] ; then
     mv ${GL2CITY}.mmdb.tmp ${GL2CITY}.mmdb
-    echo "ダウンロードが正常に完了しました"
+    echo "データベースを更新しました"
 else
     rm -f ${GL2CITY}.mmdb.tmp
     echo "ダウンロードに失敗しました"

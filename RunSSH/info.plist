@@ -7,7 +7,16 @@
 	<key>connections</key>
 	<dict>
 		<key>0F670CDD-25DA-42B5-BE17-A337C369E2BA</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>67BBD928-E5F6-4667-931C-1AFC24584AF8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>67BBD928-E5F6-4667-931C-1AFC24584AF8</key>
 		<array>
 			<dict>
@@ -25,7 +34,7 @@
 	<key>description</key>
 	<string>run ssh on terminal</string>
 	<key>disabled</key>
-	<true/>
+	<false/>
 	<key>name</key>
 	<string>Run SSH</string>
 	<key>objects</key>
@@ -39,6 +48,14 @@
 				<integer>127</integer>
 				<key>keyword</key>
 				<string>ssh</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
 				<key>script</key>
 				<string>result=$(awk '$1~/{query}/{split($1,e,",");print e[1]}' "$HOME/.ssh/known_hosts"|sort)
 

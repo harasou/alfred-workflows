@@ -6,6 +6,17 @@
 	<string></string>
 	<key>connections</key>
 	<dict>
+		<key>86644BCC-DF28-4F23-8BCF-E8A21E704079</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E6E1DE77-B581-4F64-86BF-EF208D25ED02</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>E6E1DE77-B581-4F64-86BF-EF208D25ED02</key>
 		<array>
 			<dict>
@@ -23,7 +34,7 @@
 	<key>description</key>
 	<string></string>
 	<key>disabled</key>
-	<true/>
+	<false/>
 	<key>name</key>
 	<string>Munin</string>
 	<key>objects</key>
@@ -37,6 +48,14 @@
 				<integer>127</integer>
 				<key>keyword</key>
 				<string>munin</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
 				<key>script</key>
 				<string>cat &lt;&lt;'EOD' | ./main {query}
 {
@@ -99,7 +118,7 @@ EOD</string>
 			<key>type</key>
 			<string>alfred.workflow.trigger.hotkey</string>
 			<key>uid</key>
-			<string>7EEC99CD-6944-44BD-8784-A7E997572CA7</string>
+			<string>86644BCC-DF28-4F23-8BCF-E8A21E704079</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -113,7 +132,7 @@ EOD</string>
 			<key>ypos</key>
 			<real>10</real>
 		</dict>
-		<key>7EEC99CD-6944-44BD-8784-A7E997572CA7</key>
+		<key>86644BCC-DF28-4F23-8BCF-E8A21E704079</key>
 		<dict>
 			<key>ypos</key>
 			<real>10</real>

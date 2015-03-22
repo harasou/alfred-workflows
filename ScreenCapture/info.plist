@@ -6,6 +6,17 @@
 	<string></string>
 	<key>connections</key>
 	<dict>
+		<key>50C21762-0E65-4658-8A63-F2A8D7D79D37</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6C68D0BB-A89A-4FDD-BB99-B5A5B460646E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>6C68D0BB-A89A-4FDD-BB99-B5A5B460646E</key>
 		<array>
 			<dict>
@@ -25,7 +36,7 @@
 	<key>description</key>
 	<string>take screen shots from Alfred</string>
 	<key>disabled</key>
-	<true/>
+	<false/>
 	<key>name</key>
 	<string>Screen Capture</string>
 	<key>objects</key>
@@ -85,6 +96,14 @@ screencapture -{query} "$png"
 				<integer>127</integer>
 				<key>keyword</key>
 				<string>sc</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
 				<key>script</key>
 				<string>cat &lt;&lt; EOB
 &lt;?xml version="1.0"?&gt;

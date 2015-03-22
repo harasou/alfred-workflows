@@ -56,7 +56,16 @@
 			</dict>
 		</array>
 		<key>4E562B43-52A0-4CAD-A25D-92506CEF8954</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>66D4B259-ED98-4BAC-B88B-4F182B2988D2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>66D4B259-ED98-4BAC-B88B-4F182B2988D2</key>
 		<array>
 			<dict>
@@ -123,7 +132,7 @@
 	<key>description</key>
 	<string>Paste with the alfred the xml data of KeePass and IDM.</string>
 	<key>disabled</key>
-	<true/>
+	<false/>
 	<key>name</key>
 	<string>Password Paster</string>
 	<key>objects</key>
@@ -137,6 +146,14 @@
 				<integer>0</integer>
 				<key>keyword</key>
 				<string>pass</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
 				<key>script</key>
 				<string>./viewer.sh list "{query}"
 </string>

@@ -6,6 +6,8 @@ import (
 	"os"
 	"regexp"
 	"strings"
+	"bytes"
+	"io/ioutil"
 
 	"github.com/harasou/alfred"
 	"github.com/oschwald/geoip2-golang"
@@ -44,6 +46,9 @@ func main() {
 		return
 	}
 
+	var buffer bytes.Buffer
+	
+
 	for _, ip := range iplist {
 
 		r, err := db.City(net.ParseIP(ip))
@@ -69,6 +74,9 @@ func main() {
 				Subtitle: ip,
 				Icon:     fmt.Sprintf("icons/%v.png", strings.ToLower(r.Country.IsoCode)),
 			})
+				buffer.WriteString(ip + ": " + r.Country.Names["ja"] + "\n")
 		}
 	}
+	
+	ioutil.WriteFile("result.txt", buffer.Bytes(), os.ModePerm)
 }

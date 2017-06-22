@@ -113,8 +113,9 @@ keepass2alfred(){
 }
 
 listxml(){
+    pushd "$cachebase" >/dev/null
     local input="$1"
-    local xmls="$(ls $cachebase/*/filter.xml)"
+    local xmls=$(ls */filter.xml)
 
     echo '<?xml version="1.0"?>'
     echo '<items>'
@@ -126,6 +127,7 @@ listxml(){
         grep -hi "<title>.*$input.*</title>" $xmls
     fi
     echo '</items>'
+    popd >/dev/null
 }
 
 xmlencode(){
@@ -137,8 +139,9 @@ xmldecode(){
 }
 
 putvalue(){
+    pushd "$cachebase" >/dev/null
     local uid="$1"
-    local xmls="$(ls $cachebase/*/filter.xml)"
+    local xmls=$(ls */filter.xml)
 
     [[ $uid =~ ^F ]] && return
     [[ $uid =~ ^C ]] && return
@@ -148,6 +151,7 @@ putvalue(){
     { echo -e "$curr\n$hist" ; } > "$historyfile"
 
     echo -n $(echo "$curr" | sed 's|^.*<value>\([^<]*\)</value>.*$|\1|' | xmldecode | sed 's|\\|\\\\|g')
+    popd >/dev/null
 }
 
 rmhistory(){

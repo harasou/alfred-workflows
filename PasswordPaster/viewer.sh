@@ -107,7 +107,7 @@ keepass2alfred(){
             folder="$pfolder"
             pfolder="${folder%/*/}/"
         fi
-    done < "$xmlpath" | iconv -f UTF8 -t UTF8-MAC > "$filterxml"
+    done < "$xmlpath" > "$filterxml"
 
     echo "KeePass → Alfred"
 }

@@ -243,7 +243,7 @@ if [ -f ${GL2CITY}.tar.gz -a "$SHA256" == "$(shasum -a 256 ${GL2CITY}.tar.gz | a
     exit 0
 fi
 
-wget "$GeoURL?edition_id=${GL2CITY}&license_key=${LicenseKey}&suffix=tar.gz" -O ${GL2CITY}.tmp.tar.gz
+curl -s "$GeoURL?edition_id=${GL2CITY}&license_key=${LicenseKey}&suffix=tar.gz" > ${GL2CITY}.tmp.tar.gz
 
 SHA256=$(shasum -a 256 ${GL2CITY}.tar.gz | awk '{print $1}')
 

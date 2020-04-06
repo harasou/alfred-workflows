@@ -229,26 +229,32 @@
 				<key>script</key>
 				<string>#!/bin/bash
 
-GeoURL="http://geolite.maxmind.com/download/geoip/database/"
+LicenseKey=YOUR_LICENSE_KEY
 GL2CITY="GeoLite2-City"
+GeoURL="https://download.maxmind.com/app/geoip_download"
+
 
 cd mmdb
 
-MD5=$(curl -s $GeoURL/${GL2CITY}.md5)
+SHA256=$(curl -s "${GeoURL}?edition_id=${GL2CITY}&license_key=${LicenseKey}&suffix=tar.gz.sha256" | awk '{print $1}')
 
-if [ -f ${GL2CITY}.mmdb -a "$MD5" == "$(md5 -q ${GL2CITY}.mmdb)" ] ; then
+if [ -f ${GL2CITY}.tar.gz -a "$SHA256" == "$(shasum -a 256 ${GL2CITY}.tar.gz | awk '{print $1}')" ] ; then
     echo "データベースは最新でした"
     exit 0
 fi
 
+curl -s "$GeoURL?edition_id=${GL2CITY}&license_key=${LicenseKey}&suffix=tar.gz" > ${GL2CITY}.tmp.tar.gz
 
-MD5=$(curl -s $GeoURL/${GL2CITY}.mmdb.gz|gunzip|tee ${GL2CITY}.mmdb.tmp|md5 -q)
+SHA256=$(shasum -a 256 ${GL2CITY}.tar.gz | awk '{print $1}')
 
-if [ "$MD5" == "$(md5 -q ${GL2CITY}.mmdb.tmp)" ] ; then
-    mv ${GL2CITY}.mmdb.tmp ${GL2CITY}.mmdb
+if [ "$SHA256" == "$(shasum -a 256 ${GL2CITY}.tmp.tar.gz | awk '{print $1}')" ] ; then
+    cp -p ${GL2CITY}.tmp.tar.gz ${GL2CITY}.tar.gz
+    tar zxf ${GL2CITY}.tar.gz
+    mv GeoLite2-City_*/${GL2CITY}.mmdb ${GL2CITY}.mmdb
+    rm -rf GeoLite2-City_*
     echo "データベースを更新しました"
 else
-    rm -f ${GL2CITY}.mmdb.tmp
+    rm -f ${GL2CITY}.tmp.tar.gz
     echo "ダウンロードに失敗しました"
     exit 2
 fi

@@ -1,4 +1,5 @@
 .DS_Store
+workflows
 PasswordPaster/cache
 Munin/run.sh
 GeoIP2/*.txt

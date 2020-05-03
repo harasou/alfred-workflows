@@ -8,7 +8,7 @@ Alfred を使用して、IPアドレスのカントリコードを簡単に引�
 ## Install
 
 1. workflow のインストール
-    - [GeoIP2.alfredworkflow のダウンロード](https://github.com/harasou/alfred-workflows/blob/master/alfredworkflow/GeoIP2.alfredworkflow?raw=true)
+    - [GeoIP2.alfredworkflow のダウンロード](https://github.com/harasou/alfred-workflows)
 
 1. MaxMind からデータベースのダウンロード
 	 - Workflowsを開き、GeoIP2で、geoip(keyword)の /bin/bash(Run script)を開く。

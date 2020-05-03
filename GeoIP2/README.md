@@ -11,6 +11,9 @@ Alfred を使用して、IPアドレスのカントリコードを簡単に引�
     - [GeoIP2.alfredworkflow のダウンロード](https://github.com/harasou/alfred-workflows/blob/master/alfredworkflow/GeoIP2.alfredworkflow?raw=true)
 
 1. MaxMind からデータベースのダウンロード
+	 - Workflowsを開き、GeoIP2で、geoip(keyword)の /bin/bash(Run script)を開く。
+	 - YOUR_LICENSE_KEY に自身のライセンスキーを入力する。<br>
+	   ※(ライセンスキーはmaxmindにアカウントを発行後、取得する: https://dev.maxmind.com/geoip/geoip2/geolite2/)
     - Alfred で `geoip` と入力し、`geoip download` を選択＆決定するとダウンロードが開始され、ダウンロードが完了すると通知がくる。
     - ![geoip_download](img/geoip_download.png)
 

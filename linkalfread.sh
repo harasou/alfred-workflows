@@ -2,7 +2,7 @@
 
 SCRIPT_DIR=$(cd $(dirname $0);pwd)
 
-LIB="$HOME/Library/Application Support/Alfred 3/Alfred.alfredpreferences/workflows"
+LIB="$(echo $HOME/Library/Application\ Support/Alfred*/Alfred.alfredpreferences/workflows)"
 cd "$LIB" || exit 2
 
 for wf in GeoIP2 Munin PasswordPaster RunSSH ScreenCapture

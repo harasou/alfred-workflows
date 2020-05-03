@@ -1,0 +1,35 @@
+#!/bin/bash
+
+if [ -z "$LICENSE_KEY" ]; then
+    echo "ライセンスキーが設定されていないため、データベースを取得できませんでした"
+    exit 1
+fi
+
+cd mmdb
+
+GL2_ID="GeoLite2-City"
+
+GL2_URL="https://download.maxmind.com/app/geoip_download?license_key=$LICENSE_KEY&edition_id=$GL2_ID"
+GL2_TGZ_URL="$GL2_URL&suffix=tar.gz"
+GL2_SHA256_URL="$GL2_URL&suffix=tar.gz.sha256"
+
+GL2_MMDB="$GL2_ID.mmdb"
+GL2_TGZ="$GL2_ID.mmdb.tar.gz"
+
+sha256sum=$(curl -s $GL2_SHA256_URL|cut -f1 -d' ')
+
+if [ x$sha256sum == x$(shasum -ba 256 $GL2_TGZ 2>/dev/null | cut -f1 -d' ') ]; then
+    echo "データベースは最新です"
+    exit 0
+fi
+
+if [ x$sha256sum == x$(curl -s $GL2_TGZ_URL|tee $GL2_TGZ|shasum -ba 256|cut -f1 -d' ') ]; then
+    tar zxf $GL2_TGZ --strip-components=1 \*/$GL2_MMDB
+    echo "データベースを更新しました"
+else
+    rm -f $GL2_TGZ
+    echo "データベースの取得に失敗しました"
+    exit 2
+fi
+
+exit 0

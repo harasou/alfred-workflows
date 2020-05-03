@@ -1,4 +1,5 @@
+.DS_Store
 PasswordPaster/cache
 Munin/run.sh
-GeoIP2/whois.txt
-GeoIP2/mmdb/GeoLite2-City.mmdb
+GeoIP2/*.txt
+GeoIP2/mmdb/

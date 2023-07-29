@@ -5,7 +5,7 @@ SCRIPT_DIR=$(cd $(dirname $0);pwd)
 LIB="$(echo $HOME/Library/Application\ Support/Alfred*/Alfred.alfredpreferences/workflows)"
 cd "$LIB" || exit 2
 
-for wf in GeoIP2 Munin PasswordPaster RunSSH ScreenCapture
+for wf in GeoIP2 ThisIsUnsafe PasswordPaster RunSSH ScreenCapture
 do
     printf "%-15s ... " $wf 
     if [ -e $wf ] ; then
